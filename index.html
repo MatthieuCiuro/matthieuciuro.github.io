@@ -1,0 +1,579 @@
+<html>
+<head>
+  <link rel="stylesheet" href="/assets/reset/normalize.css">
+
+  <style>
+  @import url(http://fonts.googleapis.com/css?family=Squada+One);
+*:after,
+*:before {
+  content: '';
+  position: absolute;
+  width: inherit;
+  height: inherit;
+}
+body {
+  perspective: 800px;
+  background: #EEE;
+}
+.controller {
+  margin: 60px auto;
+  transform-style: preserve-3d;
+  width: 400px;
+  height: 180px;
+  background: #353334;
+  position: relative;
+  transform-origin: 50% 100%;
+  animation: rotate 4.5s infinite;
+  animation-direction: alternate;
+  font-family: 'Squada One', cursive;
+  box-shadow: 
+    0 25px 0 15px #d0cfcd inset,
+    0 0 0 15px #d0cfcd inset
+    ;
+}
+.controller:before {
+  height: 100px;
+  background: rgba(0,0,0,.3);
+  box-shadow: 0 0 20px 10px #EEE inset;
+  -webkit-filter: blur(20px);
+  border-radius: 50px;
+  transform:
+    rotateX(70deg)
+    translateZ(-160px);
+}
+.controller:after {
+  background: #CCC;
+  background-image:
+    radial-gradient(#222 8px, transparent 8px),
+    radial-gradient(#222 8px, transparent 8px),
+    radial-gradient(#222 8px, transparent 8px),
+    radial-gradient(#222 8px, transparent 8px),
+    radial-gradient(#222 8px, transparent 8px),
+    radial-gradient(#222 8px, transparent 8px);
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-position: 
+    374px 154px,
+    50% 154px,
+    10px 154px,
+    374px 10px,
+    50% 10px,
+    10px 10px;
+  transform: translateZ(-40px);
+}
+.controller .logo {
+  font-size: 20px;
+  color: #a42d17;
+  position: absolute;
+  left: 270px;
+  top: 40px;
+  transform: translateZ(1px);
+}
+.sides {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+.sides li {
+  position: absolute;
+  background: #999592;
+  transform-origin: 0 0;
+  box-shadow:
+    0 25px 0 0 #888 inset,
+    0 27px 0 0 #555 inset;
+}
+.sides li:nth-child(1) {
+  bottom: -40px;
+  height: 40px;
+  width: 400px;
+  transform: rotateX(-90deg);
+}
+.sides li:nth-child(2) {
+  bottom: -220px;
+  height: 40px;
+  width: 400px;
+  transform: rotateX(-90deg);
+}
+.sides li:nth-child(3) {
+  right: 0px;
+  height: 40px;
+  width: 180px;
+  transform-origin: 100% 0%;
+  transform: rotateX(-90deg) rotateY(90deg);
+}
+.sides li:nth-child(4) {
+  left: 220px;
+  height: 40px;
+  width: 180px;
+  transform-origin: 100% 0%;
+  transform: rotateX(-90deg) rotateY(90deg);
+}
+.directions ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 30px;
+  top: 70px;
+  transform: translateZ(1px);
+}
+.directions li {
+  background: #ccc;
+  border-radius: 5px;
+  position: absolute;
+}
+.directions .updown {
+  width: 80px;
+  height: 40px;
+  top: 20px;
+}
+.directions .leftright {
+  width: 40px;
+  height: 80px;
+  left: 20px;
+}
+.directions ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  border-radius: 3px;
+  transform-style: preserve-3d;
+}
+.updown-button {
+  animation: dirPressing1 1s infinite linear alternate;
+  transform-origin: 50% 50%;
+  width: 30px;
+  height: 70px;
+  left: 55px;
+  top: 75px;
+}
+.leftright-button {
+  animation: dirPressing1 1s infinite linear alternate;
+  transform-origin: 50% 50%;
+  width: 70px;
+  height: 30px;
+  left: 35px;
+  top: 95px;
+}
+.directions ol li {
+  background: #000;
+  width: 100%;
+  height: 100%;
+}
+
+.updown-button li:last-child:before {
+  top: 6px;
+  left: 8px;
+  width: 0;
+	height: 0px;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-bottom: 10px solid #333;
+}
+.updown-button li:last-child:after {
+  bottom: 6px;
+  left: 8px;
+  width: 0;
+	height: 0px;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-top: 10px solid #333;
+}
+
+.leftright-button li:last-child:before {
+  left: 8px;
+  top: 6px;
+  width: 0;
+	height: 0px;
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-right: 10px solid #333;
+}
+.leftright-button li:last-child:after {
+  bottom: 8px;
+  right: 6px;
+  width: 0;
+	height: 0;
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 10px solid #333;
+  z-index: 100;
+}
+
+.directions ol li:nth-child(1) {
+  transform: translateZ(2px);
+}
+.directions ol li:nth-child(2) {
+  transform: translateZ(4px);
+}
+.directions ol li:nth-child(3) {
+  transform: translateZ(6px);
+}
+.directions ol li:nth-child(4) {
+  transform: translateZ(8px);
+}
+.directions ol li:nth-child(5) {
+  transform: translateZ(10px);
+  background: #151515;
+}
+.selectstart {
+  transform: translateZ(1px);
+  position: absolute;
+  width: 100px;
+  height: 15px;
+  top: 40px;
+  left: 135px;
+  border-radius: 5px;
+  background: #848484;
+  box-shadow: 
+    0 20px 0 #848484,
+    0 40px 0 #848484,
+    0 110px 0 #848484;
+}
+.selectstart:before {
+  background: #848484;
+  border-radius: 0 0 5px 5px;
+}
+.selectstart:after {
+  background: #848484;
+  top: 110px;
+  border-radius: 5px 5px 0 0;
+}
+.selectstart ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: #999;
+  width: 100%;
+  height: 45px;
+  border-radius: 5px;
+  position: absolute;
+  top: 60px;
+  box-shadow: 
+    0 0 0 1px #999 inset,
+    0 0 0 5px #c5c4c2 inset; 
+  transform-style: preserve-3d;
+}
+.selectstart li {
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 12px;
+  background: #333;
+  border-radius: 12px;
+  top: 16px;
+  transform-style: preserve-3d;
+}
+.selectstart .select {
+  left: 13px;
+}
+.selectstart .start {
+  right: 13px;
+}
+.selectstart ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  transform-style: preserve-3d;
+}
+.selectstart ol li {
+  background: #6b1b10;
+  border-radius: 12px;
+  display: block;
+  width: 30px;
+  height: 12px;
+  background: #000;
+  border-radius: 12px;
+  position: absolute;
+  top: 0;
+  transform-style: preserve-3d;
+}
+.selectstart ol li:nth-child(1) {
+  transform: translateZ(2px);
+}
+.selectstart ol li:nth-child(2) {
+  transform: translateZ(4px);
+}
+.selectstart ol li:nth-child(3) {
+  transform: translateZ(6px);
+  background: #323031;
+}
+.select:after,
+.start:after {
+  text-transform: uppercase;
+  color: #a42d17;
+  top: -35px;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+}
+.select:after {
+  content: 'select';
+  left: -5px;
+}
+.start:after {
+  content: 'start';
+  left: 3px;
+}
+.button {
+  transform: translateZ(1px);
+  list-style: none;
+  margin: 0;
+  position: absolute;
+  background: #ccc;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  bottom: 35px;
+  transform-style: preserve-3d;
+}
+.button:after {
+  bottom: -41px;
+  right: -26px;
+  color: #a42d17;
+  font-weight: bold;
+  transform: translateZ(1px);
+}
+.button-a:after {
+  content: 'A';
+}
+.button-b:after {
+  content: 'B';
+}
+.button-a {
+  right: 40px;
+}
+.button-b {
+  right: 100px;
+}
+.button li {
+  background: #6b1b10;
+  border-radius: 50%;
+  display: block;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+}
+.button li:nth-child(1) {
+  transform: translateZ(2px);
+  box-shadow: 
+    0 0 0 1px #333,
+    0 0 2px 2px #333;
+}
+.button li:nth-child(2) {
+  transform: translateZ(4px);
+  background: #781a0e;
+}
+.button li:nth-child(3) {
+  transform: translateZ(6px);
+  background: #781a0e;
+}
+.button li:nth-child(4) {
+  transform: translateZ(8px);
+  background: #8a1f0f;
+}
+.button li:nth-child(5) {
+  transform: translateZ(10px);
+  background: #8a1f0f;
+}
+.button li:nth-child(6) {
+  transform: translateZ(12px);
+  background: #a42d17;
+}
+.button li:last-child {    
+  background: radial-gradient(rgba(255,255,255,.4) 0%,transparent 80%);  
+  background-size: 30px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+@keyframes rotate {
+  0% { transform: rotateY(-40deg) rotateX(20deg); }
+  100% { transform: rotateY(320deg) rotateX(20deg); }
+}
+@keyframes dirPressing1 {
+  0% { transform: rotateX(-5deg); }
+  100% { transform: rotateX(5deg); }
+}
+  </style>
+
+  <script>
+    window.console = window.console || function(t) {};
+    window.open = function(){ console.log('window.open is disabled.'); };
+    window.print = function(){ console.log('window.print is disabled.'); };
+    // Support hover state for mobile.
+    if (false) {
+      window.ontouchstart = function(){};
+    }
+  </script>
+
+    <script src="//assets.codepen.io/assets/libs/prefixfree.min-de773054e90c52a3c2631c944681b64e.js">"></script>
+
+    <script src="//assets.codepen.io/assets/libs/modernizr-0e41cf622f0788eca25945c37bdc5b15.js">"></script>
+ <meta charset='utf-8'>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="styles.css">
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="script.js"></script>
+   <title>Accueil</title>
+<script> 
+if ( window.addEventListener ) {
+var kkeys = [], konami = "38,38,40,40,37,39,37,39,66,65";
+window.addEventListener("keydown", function(e){
+kkeys.push( e.keyCode );
+if ( kkeys.toString().indexOf( konami ) >= 0 ) {
+alert('Cette femme a d\351couvert comment perdre 40kg en 3 jours seulement. Les m\351decins la détestent, d\351couvrez son terrible secret');
+window.location = "http://rickrolled.fr/";
+}
+}, true);
+}
+</script>
+</head>
+<body>
+
+<div id='cssmenu'>
+<ul>
+   <li class='active'><a href='#'><span>Accueil</span></a></li>
+   <li><a href='http://youtube.com/c/TheMattrio23'><span>YouTube</span></a></li>
+   <li><a href='http://twitter.com/Mattrio23'><span>Twitter</span></a></li>
+   <li class='last'><a href='me-contacter.html'><span>Me Contacter</span></a></li>
+</ul>
+</div>
+<style> 	{
+ background: #27292A;
+ padding-top:1em;
+ font-size:2em;
+ text-align:center;
+}
+</style>
+<link href="clock.css" rel="stylesheet" type="text/css" />
+
+<div id="clock">
+	<div id="a">
+		<div id="b">
+			<div id="c">
+				<div id="d">
+					<div id="sh">
+						<div class="hh">
+							<div class="h"></div>
+						</div>
+						<div class="mm">
+							<div class="m"></div>
+							<div class="mr"></div>
+						</div>
+						<div class="ss">
+							<div class="s"></div>
+						</div>
+					</div>
+					<div id="ii">
+					<b><i></i><i></i><i></i><i></i></b>
+					<b><i></i><i></i><i></i><i></i></b>
+					<b><i></i><i></i><i></i><i></i></b>
+					<b><i></i><i></i><i></i><i></i></b>
+					<b><i></i><i></i><i></i><i></i></b>
+					<b><i></i><i></i><i></i><i></i></b>
+					</div>
+					<div id="e">
+						<div id="f">
+							<u>12<u>1<u>2<u>3</u>4</u>5</u></u>
+						</div>
+						<div id="g">
+							<u><u>11<u>10<u>9</u>8</u>7</u>6</u>
+						</div>
+						<div id="q"><a href="" style="position:relative;z-index:1000;color:#222;text-decoration:none;">quartz</a></div>
+					</div>
+					<div class="hh">
+						<div class="h"></div>
+					</div>
+					<div class="mm">
+						<div class="m"></div>
+						<div class="mr"></div>
+					</div>
+					<div class="ss">
+						<div class="s"></div>
+						<div class="sr"></div>
+					</div>
+					<div id="k"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+	<div style="color:003399;text-align:center;font-family:'Helvetica';font-size:100pt">SITE WIP</div>
+	<div style="color:0033CC;text-align:center;FONT-family:'Helvetica';font-size:50pt;display:inline-block;width:100%">Matthieu Ciuro</div>
+<div style="text-align:center;display:inline-block;width:-1%; float:left"><a class="twitter-timeline" href="https://twitter.com/Mattrio23" data-widget-id="583194846799753216">Tweets de @Mattrio23</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></div>
+  <div class="controller">
+  <ul class="sides">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <h1 class="logo">Mattendo</h1>
+  <div class="directions">
+    <ul>
+      <li class="updown"></li>
+      <li class="leftright"></li>
+    </ul>
+    <ol class="updown-button">
+      <li></li><li></li><li></li><li></li><li></li>
+    </ol>
+    <ol class="leftright-button">
+      <li></li><li></li><li></li><li></li><li></li>
+    </ol>
+  </div>
+  <div class="selectstart">
+    <ul>
+      <li class="select">
+        <ol>
+          <li></li><li></li><li></li>
+        </ol>
+      </li>
+      <li class="start">
+        <ol>
+          <li></li><li></li><li></li>
+        </ol>
+      </li>
+    </ul>
+  </div>
+  <ul class="button button-a">
+    <li></li><li></li><li></li><li></li><li></li><li></li>
+  </ul>
+  <ul class="button button-b">
+    <li></li><li></li><li></li><li></li><li></li><li></li>
+  </ul>
+</div>
+
+  <script src='//assets.codepen.io/assets/libs/fullpage/jquery-c152c51c4dda93382a3ae51e8a5ea45d.js'></script>
+
+  <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage('resize', "*");
+    }
+  </script>
+
+  <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-6c99970ade81e43be51fa877be0f7600.js"></script>
+	<CENTER>
+		<img ALIGN="center"SRC="rick-astely.gif"HEIGHT="500"WIDTH="750">
+	</CENTER>
+<style> 
+img {
+    width: 700px;
+    height: 500px;
+    background: red;
+    -webkit-transition: width 2s, height 2s;
+    transition: width 2s, height 2s;
+}
+
+img:hover {
+    width: 1200px;
+    height: 800px;
+}
+</style>
+</body>
+</html>
